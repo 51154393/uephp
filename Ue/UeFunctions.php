@@ -203,7 +203,6 @@ function tool($args){
 	static $staticTools = array();
 	$arguments = func_get_args();
 	$className = array_shift($arguments);
-	$className = '\\'.$className;
 	if(empty($staticTools[$className])){
 		$fileUri = U_E.'tools'.U_D.$className.'.php';
 		if(!is_file($fileUri)){throw new Exception("类文件 {$className} 不存在");}
