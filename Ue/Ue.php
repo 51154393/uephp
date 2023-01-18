@@ -43,6 +43,7 @@ class Ue{// 基础类
 	protected $cacher    = null;// 缓存对象
 	protected $cacheName;// 缓存名称
 	protected $table;// 数据表操作对象
+	protected $viewDir;// 视图目录
 	
 	public function __construct(){// 初始化基础构造
 		$this->viewDir = U_APP.'/'.U_VIEW.'/';
@@ -87,7 +88,7 @@ class Ue{// 基础类
 		$this->cacher   = $className::getInstance($config);
 	}
 	
-	protected function cache($name, $id = null, $queryMethod, $timer = 3600, $isSuper = true){// 进行缓存工作
+	protected function cache($name, $queryMethod, $id = null, $timer = 3600, $isSuper = true){// 进行缓存工作
 		if(U_CACHE){
 			$queryRes    = $this->$queryMethod();
 			$this->$name = $queryRes;
@@ -137,7 +138,7 @@ class UeModel{
 		$this->cacher   = $className::getInstance($config);
 	}
 	
-	public function cache($name, $parameter = null, $queryMethod, $timer = 3600, $isSuper = true){// 在模型内设置缓存并获取缓存数据
+	public function cache($name, $queryMethod, $parameter = null, $timer = 3600, $isSuper = true){// 在模型内设置缓存并获取缓存数据
 		if(U_CACHE){return $this->$queryMethod();}
 		$this->getCacher();
 		$name             = getCacheName($name, $parameter, $isSuper);
